@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Calculator from '@/client/components/Calculator.svelte'
+import type { CollectionEntry } from 'astro:content'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getPageByPath } from '@/utils/paths.js'
+import { ui, defaultLang } from '@/i18n/ui.js'
+export interface Props {
+	locale: keyof typeof ui
+	page: CollectionEntry<'pages'>
+}
+
+export async function getStaticPaths() {
+	return getPageByPath('result')
+}
+const { page, locale = defaultLang } = Astro.props
+const { seoTitle, description } = page?.data || {}
+---
+
+<Layout title={seoTitle} {description} {locale}>
+	<Calculator
+		client:idle
+		newTestUrl={getRelativeLocaleUrl(locale, '')}
+		resultUrl={getRelativeLocaleUrl(locale, 'result')}
+		{locale}
+	/>
+</Layout>

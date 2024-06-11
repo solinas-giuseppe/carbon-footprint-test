@@ -1,7 +1,8 @@
 /* circular progress:
 https://www.30secondsofcode.org/css/s/circular-progress-bar/ */
 
-@import "./typo.css";
+@import './typo.css';
+@import './colors.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

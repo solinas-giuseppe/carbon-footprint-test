@@ -1,0 +1,48 @@
+---
+import { ui, defaultLang } from '@/i18n/ui.js'
+import { textMd, displayXs } from '@/utils/typo.js'
+import Icon from '@/components/common/Icon.astro'
+import { type PricingFeature, type PricingItem } from '@/utils/pricing.js'
+import { useTranslations } from '@/i18n/utils.js'
+import { buttonBase, buttonPrimary, buttonSm } from '@/utils/buttons.js'
+
+export interface Props {
+	locale: keyof typeof ui
+	pricingFeatures: PricingFeature[]
+	pricingItem: PricingItem
+}
+const { locale = defaultLang, pricingItem, pricingFeatures } = Astro.props
+const t = useTranslations(locale)
+if (!pricingItem) return ''
+const { name, description, price, currency, features } = pricingItem
+const getFeatureColor = ({ order, features }) => {
+	if (order === features.length - 1) return 'text-primary-900'
+	return (features || []).includes(order) ? 'text-base-700' : 'text-base-500'
+}
+---
+
+<div class="flex flex-col gap-2 rounded-8 bg-base-000 p-3">
+	<h2 class="text-tlg font-bolder uppercase text-primary-900" set:html={name} />
+	<p class:list={[textMd, 'text-base-600']} set:html={description} />
+	<div>
+		<span set:html={price + currency} class:list={[displayXs, 'font-bolder', 'text-primary-900']} />
+		<span set:html={t('utils.price-per-year')} class:list={[textMd, 'text-base-500']} />
+	</div>
+	<button
+		set:html={t('action.buy')}
+		type="button"
+		class:list={[buttonBase, buttonPrimary, buttonSm]}
+	/>
+	<ul class="flex flex-col gap-2">
+		{
+			pricingFeatures
+				.sort((a, b) => (b.order > a.order ? -1 : 1))
+				.map(({ text, order }) => (
+					<li class="grid grid-cols-[1rem_auto] gap-1">
+						<Icon name="check" size="2" />
+						<span set:html={text} class:list={[textMd, getFeatureColor({ order, features })]} />
+					</li>
+				))
+		}
+	</ul>
+</div>

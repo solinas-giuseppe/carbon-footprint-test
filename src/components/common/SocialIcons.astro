@@ -1,0 +1,32 @@
+---
+import { ui, defaultLang } from '@/i18n/ui.js'
+import { useTranslations } from '@/i18n/utils'
+import { getSocialIconsList } from '@/utils/social.js'
+import { type Size } from '@/utils/sizes.js'
+import Icon from '@/components/common/Icon.astro'
+
+import type { ClassList } from '@/utils/props'
+export interface Props {
+	locale: keyof typeof ui
+	list?: string[]
+	listClass?: ClassList
+	fillColor?: string
+	strokeColor?: string
+	size?: Size
+}
+const { list = [], listClass, fillColor, strokeColor, locale = defaultLang, size = 5 } = Astro.props
+const t = useTranslations(locale)
+const socialIconsList = getSocialIconsList(t, list)
+---
+
+<ul class:list={listClass}>
+	{
+		socialIconsList.map(({ title, icon, href }) => (
+			<li>
+				<a {href} {title} target="_blank">
+					<Icon name={icon} {fillColor} {strokeColor} {size} />
+				</a>
+			</li>
+		))
+	}
+</ul>

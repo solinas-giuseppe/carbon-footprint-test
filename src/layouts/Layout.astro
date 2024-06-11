@@ -1,21 +1,86 @@
 ---
-import "@/styles/base.css";
+import '@/styles/base.css'
+import { ViewTransitions } from 'astro:transitions'
+import { ui, defaultLang } from '@/i18n/ui.js'
+import Header from '@/components/layouts/base/Header.astro'
+import Footer from '@/components/layouts/base/Footer.astro'
+import { SEO } from 'astro-seo'
+import { getPageMetaTags } from '@/utils/meta-tags'
 export interface Props {
-    title?: string;
+	title?: string
+	description?: string
+	locale: keyof typeof ui
 }
 
-const { title } = Astro.props;
+const { title, description, locale = defaultLang } = Astro.props
+const metaTags = getPageMetaTags({
+	title,
+	description,
+	url: new URL(Astro.url.pathname, Astro.site).toString(),
+	site: Astro.site
+})
 ---
 
 <!doctype html>
-<html lang="it">
-    <head>
-        <meta charset="UTF-8" />
-        <title set:html="Carbon Api" />
-        <meta name="description" content="Carbon Footprint Test" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <body class="bg-secondary-100 font-sans">
-        <slot />
-    </body>
+<html lang={locale}>
+	<head>
+        { import.meta.env.GTAG_ID && (
+          <!-- Google tag (gtag.js) -->
+          <script async is:inline src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.GTAG_ID}`}></script>
+          <script async is:inline define:vars={{ gtagId: import.meta.env.GTAG_ID  }}>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', gtagId);
+          </script>
+        )}
+        { import.meta.env.TAG_MANAGER_ID && (
+          <!-- Google Tag Manager -->
+          <script async is:inline define:vars={{ tagManagerId: import.meta.env.TAG_MANAGER_ID  }}>
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer',tagManagerId);
+          </script>
+          <!-- End Google Tag Manager -->
+        )}
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		{title && <SEO {...metaTags} />}
+		<ViewTransitions />
+	</head>
+	<body class="min-w-[1440px] bg-secondary-100 font-sans transition-opacity">
+		<Header id={'main-header'} locale={locale} />
+		<main
+			id="main"
+			class="flex min-h-[calc(100vh-var(--header-height)-var(--footer-height))] flex-col items-center px-12 py-10 text-primary-900"
+		>
+			<section class="w-full max-w-[1146px]">
+				<slot />
+			</section>
+		</main>
+		<Footer id={'main-footer'} locale={locale} />
+		<script async is:inline>
+			function adjustLayout() {
+				if (document.getElementById('main-header')) {
+					document.documentElement.style.setProperty(
+						'--header-height',
+						String(document.getElementById('main-header').offsetHeight + 'px')
+					)
+				}
+				if (document.getElementById('main-footer')) {
+					document.documentElement.style.setProperty(
+						'--footer-height',
+						String(document.getElementById('main-footer').offsetHeight + 'px')
+					)
+				}
+			}
+			document.addEventListener('astro:after-swap', () => {
+				adjustLayout()
+			})
+			adjustLayout()
+		</script>
+	</body>
 </html>

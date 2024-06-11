@@ -1,0 +1,57 @@
+---
+import '@/styles/base.css'
+import { displayLg, displayMd } from '@/utils/typo.js'
+import {
+	buttonBase,
+	buttonPrimary,
+	buttonSecondary,
+	buttonSecondaryNeutral,
+	buttonTertiary,
+	buttonXl,
+	buttonLg,
+	buttonMd,
+	buttonSm
+} from '@/utils/buttons.js'
+const buttonList = [
+	{
+		label: 'Primary',
+		buttonType: buttonPrimary
+	},
+	{
+		label: 'Secondary',
+		buttonType: buttonSecondary
+	},
+	{
+		label: 'Secondary Neutral',
+		buttonType: buttonSecondaryNeutral
+	},
+	{
+		label: 'Tertiary',
+		buttonType: buttonTertiary
+	}
+]
+---
+
+<div class="grid gap-4 p-3">
+	<h1 class:list={[displayLg, 'font-bolder']}>Buttons</h1>
+	{
+		buttonList.map(({ label, buttonType }) => (
+			<>
+				<div>
+					<h2 set:html={label} class:list={[displayMd, 'font-bolder']} />
+				</div>
+				{[false, true].map((disabled) => (
+					<div class="grid grid-cols-4">
+						{[buttonSm, buttonMd, buttonLg, buttonXl].map((sizeClass) => (
+							<div>
+								<button {disabled} class:list={[buttonBase, buttonType, sizeClass]}>
+									Button
+								</button>
+							</div>
+						))}
+					</div>
+				))}
+			</>
+		))
+	}
+</div>

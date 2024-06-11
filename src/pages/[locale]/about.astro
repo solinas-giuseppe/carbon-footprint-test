@@ -1,0 +1,26 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import type { CollectionEntry } from 'astro:content'
+import { getPageByPath } from '@/utils/paths.js'
+import { displayLg, textLg } from '@/utils/typo.js'
+import { ui, defaultLang } from '@/i18n/ui.js'
+export interface Props {
+	locale: keyof typeof ui
+	page: CollectionEntry<'pages'>
+}
+
+export async function getStaticPaths() {
+	return getPageByPath('about')
+}
+const { page, locale = defaultLang } = Astro.props
+const { title, seoTitle, description } = page?.data || {}
+---
+
+<Layout title={seoTitle} {description} {locale}>
+	<div class="flex max-w-[640px] flex-col gap-3">
+		<div class="flex flex-col gap-1">
+			<h1 set:html={title} class:list={[displayLg, 'font-bolder']} />
+			<p set:html={page.body} class:list={[textLg, 'font-medium']} />
+		</div>
+	</div>
+</Layout>

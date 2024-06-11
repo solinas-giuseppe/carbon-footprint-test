@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import CarbonFormPage from '@/components/pages/CarbonFormPage.astro'
+import { getLangFromUrl } from '@/i18n/utils.js'
+import { getPageByPath } from '@/utils/paths.js'
+const locale = getLangFromUrl(Astro.url)
+
+export async function getStaticPaths() {
+	return getPageByPath('home')
+}
+
+interface Props {
+	page: CollectionEntry<'pages'>
+}
+const { page } = Astro.props
+---
+
+<CarbonFormPage {locale} {page} />

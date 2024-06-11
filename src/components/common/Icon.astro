@@ -1,0 +1,34 @@
+---
+import sizes, { type Size } from '@/utils/sizes.js'
+import { type ClassList } from '@/utils/props.js'
+export interface Props {
+	name:
+		| 'linkedin'
+		| 'whatsapp'
+		| 'whatsapp-inner'
+		| 'instagram'
+		| 'instagram-inner'
+		| 'messenger'
+		| 'brand'
+		| 'check'
+	size?: Size
+	fillColor?: string
+	strokeColor?: string
+	class?: ClassList
+}
+const {
+	name,
+	size = 2.5,
+	fillColor = 'var(--base-000)',
+	strokeColor = 'currentColor',
+	class: className = ''
+} = Astro.props
+---
+
+<div class:list={className}>
+	<svg class:list={sizes[size] || size}>
+		<use
+			href={['/assets/icons/all.svg', '#', name].join('')}
+			style={`--fill: ${fillColor}; --stroke: ${strokeColor};`}></use>
+	</svg>
+</div>

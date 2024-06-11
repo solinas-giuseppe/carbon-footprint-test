@@ -1,0 +1,23 @@
+---
+import '@/styles/base.css'
+import { formGroup, formGroupBase, labelBase, inputBase } from '@/utils/inputs.js'
+import { displayLg, textMd, textSm } from '@/utils/typo.js'
+---
+
+<div class="grid gap-4 p-3">
+	<h1 class:list={[displayLg, 'font-bolder']}>Inputs</h1>
+	<form class="flex flex-col gap-3">
+		<div class:list={[formGroup, formGroupBase]}>
+			<label class:list={[textSm, 'font-semibold']}>Label</label>
+			<input required class:list={[textMd, inputBase]} placeholder="Placeholder" />
+		</div>
+		<div class:list={[formGroup, formGroupBase]}>
+			<label class:list={[textSm, 'font-semibold']}>Label</label>
+			<input required class:list={[textMd, inputBase]} placeholder="Placeholder" />
+		</div>
+		<div class:list={[formGroup, formGroupBase]}>
+			<label class:list={[labelBase, textSm, 'font-semibold']}>Label</label>
+			<input disabled class:list={[textMd, inputBase]} placeholder="Placeholder" />
+		</div>
+	</form>
+</div>

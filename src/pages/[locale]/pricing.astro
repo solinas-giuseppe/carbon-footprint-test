@@ -1,0 +1,36 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import PricingCard from '@/components/pricing/PricingCard.astro'
+import { getMockFeatures } from '@/utils/pricing.ts'
+import type { CollectionEntry } from 'astro:content'
+import { getPageByPath } from '@/utils/paths.js'
+import { displayLg, textLg } from '@/utils/typo.js'
+import { ui, defaultLang } from '@/i18n/ui.js'
+export interface Props {
+	locale: keyof typeof ui
+	page: CollectionEntry<'pages'>
+}
+
+export async function getStaticPaths() {
+	return getPageByPath('pricing')
+}
+const { page, locale = defaultLang } = Astro.props
+const { title, seoTitle, description, plans } = page?.data || {}
+const features = getMockFeatures()
+---
+
+<Layout title={seoTitle} {description} {locale}>
+	<div class="flex max-w-[640px] flex-col gap-3">
+		<div class="flex flex-col gap-1">
+			<h1 set:html={title} class:list={[displayLg, 'font-bolder']} />
+			<p set:html={page.body} class:list={[textLg, 'font-medium']} />
+		</div>
+	</div>
+	<div class="grid grid-cols-3 gap-5 pt-3">
+		{
+			plans.map((plan) => (
+				<PricingCard locale={locale} pricingFeatures={features} pricingItem={plan} />
+			))
+		}
+	</div>
+</Layout>

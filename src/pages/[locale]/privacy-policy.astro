@@ -1,0 +1,75 @@
+---
+import EmptyLayout from '@/layouts/EmptyLayout.astro'
+import type { CollectionEntry } from 'astro:content'
+import { getPageByPath } from '@/utils/paths.js'
+import { displayLg, textLg } from '@/utils/typo.js'
+import { ui, defaultLang } from '@/i18n/ui.js'
+export interface Props {
+	locale: keyof typeof ui
+	page: CollectionEntry<'pages'>
+}
+
+export async function getStaticPaths() {
+	return getPageByPath('privacy-policy')
+}
+const { page, locale = defaultLang } = Astro.props
+const { title, seoTitle, description } = page?.data || {}
+---
+
+<EmptyLayout title={seoTitle} {description} {locale}>
+	<div class="flex max-w-[640px] flex-col gap-3">
+		<div class="flex flex-col gap-1">
+			<h1 set:html={title} class:list={[displayLg, 'font-bolder']} />
+			<div class="flex flex-col gap-3">
+				<p class={textLg}>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis massa rhoncus
+					justo porttitor lobortis. Aliquam eu sem ac turpis viverra aliquam nec a lorem. Sed vel
+					condimentum sem, in venenatis est. Etiam nec lacus semper neque sagittis ullamcorper quis
+					vel ipsum. Duis accumsan quam in dolor hendrerit, sit amet viverra ligula egestas. Aenean
+					arcu ipsum, maximus nec porttitor eu, tempus eu nisl. Vestibulum nisi mauris, lobortis vel
+					massa sit amet, porttitor sagittis lorem. Integer lorem mauris, venenatis a convallis ac,
+					cursus a arcu. Suspendisse potenti. Fusce a turpis at turpis vulputate tristique et id
+					neque. Curabitur viverra nisl et mauris maximus, a vehicula quam molestie.
+				</p>
+
+				<p class={textLg}>
+					Nam eu consectetur sem. Vivamus auctor, urna sed molestie fermentum, est purus consectetur
+					sapien, et hendrerit tellus lorem vitae urna. Mauris elementum, erat at pretium consequat,
+					nisl massa interdum orci, quis vulputate est eros vel ante. Aliquam ornare metus id elit
+					elementum venenatis. Ut gravida pellentesque faucibus. Nam mattis malesuada sodales. Donec
+					non metus pellentesque, malesuada odio nec, pretium risus.
+				</p>
+
+				<p class={textLg}>
+					Phasellus sodales justo vitae ante hendrerit congue. Aliquam a nulla non dui laoreet
+					aliquam. Nunc sodales convallis est, a dignissim risus mattis vitae. Integer tincidunt
+					orci quis porttitor tincidunt. Sed dolor neque, ornare aliquam magna quis, dapibus
+					vulputate odio. Duis eu sem suscipit, hendrerit augue id, accumsan magna. Curabitur ut
+					odio lectus. Morbi eu ornare magna, ac blandit diam.
+				</p>
+
+				<p class={textLg}>
+					Integer mollis tortor ut ex hendrerit hendrerit. Mauris lobortis, lorem ut vehicula
+					lacinia, tellus massa ultrices justo, quis volutpat purus lectus sit amet purus. Vivamus
+					non mi blandit ligula porta cursus. Nulla vehicula felis sapien, at sollicitudin lacus
+					maximus a. Nunc quis consectetur libero, a luctus mauris. Vivamus sollicitudin ultrices
+					nibh, sit amet vulputate elit. Donec vestibulum et erat at rhoncus. Aliquam pulvinar
+					tempus posuere. Nulla ultrices, justo sit amet ultricies convallis, urna est dignissim ex,
+					in auctor metus leo eget lectus.
+				</p>
+
+				<p class={textLg}>
+					Suspendisse sit amet nisi arcu. Duis dapibus at justo vitae placerat. Maecenas velit
+					velit, volutpat vitae interdum non, ornare ac dui. Maecenas ut fermentum arcu, a blandit
+					eros. Fusce volutpat eros metus, quis rhoncus risus porttitor eu. Maecenas at ligula
+					tempor nisl tincidunt scelerisque. Donec scelerisque velit massa, vel aliquet quam rhoncus
+					ac. Ut interdum maximus volutpat. Curabitur sagittis ante dui, sed egestas arcu pretium
+					in. Phasellus facilisis a tortor rhoncus sodales. Aliquam lobortis eleifend tempor. Cras
+					sit amet consectetur lectus. Pellentesque in tellus erat. Nunc nec elit semper, venenatis
+					metus et, tincidunt lacus. Curabitur et sapien id eros mollis eleifend. Suspendisse
+					potenti.
+				</p>
+			</div>
+		</div>
+	</div>
+</EmptyLayout>

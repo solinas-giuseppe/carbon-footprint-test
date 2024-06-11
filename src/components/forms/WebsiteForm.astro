@@ -1,0 +1,35 @@
+---
+import { ui, defaultLang } from '@/i18n/ui.js'
+import { useTranslations } from '@/i18n/utils'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import { formGroup, inputBase } from '@/utils/inputs.js'
+import { textMd, textSm } from '@/utils/typo.js'
+import { buttonBase, buttonPrimary, buttonMd } from '@/utils/buttons.js'
+export interface Props {
+	locale: keyof typeof ui
+}
+const { locale = defaultLang } = Astro.props
+const t = useTranslations(locale)
+---
+
+<form action={getRelativeLocaleUrl(locale, 'result')} method="GET">
+	<div class:list={[formGroup, 'w-[28rem]']}>
+		<label
+			for="site"
+			class:list={['text-primary-900', textSm, 'font-semibold']}
+			set:html={t('websiteform.website.label')}
+		/>
+		<div class="grid grid-cols-[20rem_auto] gap-2">
+			<input
+				required
+				name="site"
+				class:list={[textMd, inputBase]}
+				placeholder={t('websiteform.website.placeholder')}
+			/>
+			<button
+				set:html={t('websiteform.button')}
+				class:list={[buttonBase, buttonPrimary, buttonMd]}
+			/>
+		</div>
+	</div>
+</form>

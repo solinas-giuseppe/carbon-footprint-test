@@ -1,0 +1,54 @@
+---
+import Menu from '@/components/Menu.astro'
+import Brand from '@/components/common/Brand.astro'
+import { displayXs, textMd } from '@/utils/typo.js'
+import { ui, defaultLang } from '@/i18n/ui.js'
+import { useTranslations } from '@/i18n/utils'
+import { getFooterMenu } from '@/utils/menus.js'
+import { buttonBase, buttonTertiary, buttonLg } from '@/utils/buttons.js'
+import NewsletterForm from '@/components/forms/NewsletterForm.astro'
+import SocialIcons from '@/components/common/SocialIcons.astro'
+
+export interface Props {
+	id: string
+	locale: keyof typeof ui
+}
+const { id, locale = defaultLang } = Astro.props
+const t = useTranslations(locale)
+---
+
+<footer {id} class="theme-inverted bg-secondary-100 px-9 py-6 text-primary-900" transition:persist>
+	<div class="mx-auto flex w-[81rem] flex-col gap-8">
+		<div class="flex justify-between">
+			<div class="flex basis-[687px] flex-col gap-1.5">
+				<Brand {locale} />
+				<p class={textMd} set:html={t('footer.content')} />
+			</div>
+			<div class="flex basis-[457px] flex-col gap-3">
+				<div class="flex flex-col gap-1.5">
+					<span class:list={[displayXs, 'font-bolder']} set:html={t('newsletter.title')} />
+					<p class={textMd} set:html={t('newsletter.content')} />
+				</div>
+				<NewsletterForm {locale} />
+				<SocialIcons
+					{locale}
+					listClass="flex justify-end gap-1.5"
+					fillColor="var(--base-700)"
+					strokeColor="var(--base-000)"
+					size="5"
+				/>
+			</div>
+		</div>
+		<div class="flex justify-between">
+			<Menu
+				menuItems={getFooterMenu(locale)}
+				class="gap-5"
+				itemClass={['!text-primary-900', buttonBase, buttonLg, buttonTertiary]}
+			/>
+			<p
+				class:list={[textMd, 'font-medium']}
+				set:html={t('footer.copyright', { years: ['2000', new Date().getFullYear()].join('-') })}
+			/>
+		</div>
+	</div>
+</footer>

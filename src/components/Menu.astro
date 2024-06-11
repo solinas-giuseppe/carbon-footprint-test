@@ -1,0 +1,22 @@
+---
+import { type MenuList } from '@/utils/menus.js'
+import { type ClassList } from '@/utils/props.js'
+export interface Props {
+	class?: ClassList
+	itemClass?: ClassList
+	menuItems: MenuList
+}
+const { menuItems, class: className, itemClass } = Astro.props
+---
+
+<nav>
+	<ul class:list={['flex', className]}>
+		{
+			menuItems.map(({ displayText, href, title, target }) => (
+				<li>
+					<a {href} set:html={displayText} {title} class:list={itemClass} {target} />
+				</li>
+			))
+		}
+	</ul>
+</nav>

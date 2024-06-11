@@ -1,0 +1,34 @@
+---
+import Brand from '@/components/common/Brand.astro'
+import Menu from '@/components/Menu.astro'
+import { ui, defaultLang } from '@/i18n/ui.js'
+import { getHeaderMenu } from '@/utils/menus.js'
+import { buttonBase, buttonTertiary, buttonLg } from '@/utils/buttons.js'
+import SocialIcons from '@/components/common/SocialIcons.astro'
+
+export interface Props {
+	id: string
+	locale: keyof typeof ui
+}
+const { id, locale = defaultLang } = Astro.props
+---
+
+<header {id} class="bg-base-000 text-primary-900" transition:persist>
+	<SocialIcons
+		{locale}
+		listClass="flex items-center gap-1.5 px-9 py-1.75"
+		fillColor="var(--base-000)"
+		strokeColor="var(--primary-900)"
+		list={['whatsapp', 'linkedin']}
+		size={3}
+	/>
+
+	<div class="flex items-center gap-5 px-12 py-3">
+		<Brand {locale} />
+		<Menu
+			class="gap-3"
+			itemClass={['!text-primary-900', buttonBase, buttonLg, buttonTertiary]}
+			menuItems={getHeaderMenu(locale)}
+		/>
+	</div>
+</header>

@@ -1,0 +1,20 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import Icon from '@/components/common/Icon.astro'
+import { ui } from '@/i18n/ui'
+import { useTranslations } from '@/i18n/utils'
+export interface Props {
+	locale: keyof typeof ui
+}
+const { locale } = Astro.props
+const t = useTranslations(locale)
+---
+
+<a
+	title={t('nav.home')}
+	href={getRelativeLocaleUrl(locale, '')}
+	class="flex items-center gap-1 font-bolder"
+>
+	<Icon name="brand" size="4" />
+	<span class="font-brand font-bolder leading-175">LIMIT</span>
+</a>
