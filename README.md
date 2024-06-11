@@ -128,6 +128,10 @@ props:
 + `itemClass` ([ClassList](#classlist)) - the class of the `li` elements
 + `menuItems` ([MenuList](#menulist)) - the list of menu items to display
 
+## SEO
+
+This site features meta tags implemented with [Astro SEO](https://github.com/jonasmerlin/astro-seo)
+
 
 ## .ENV variables
 

@@ -33,7 +33,7 @@ describe('CircleProgress', () => {
 	})
 
 	it('renders SVG elements with correct attributes', async () => {
-		const { container } = render(CircleProgress)
+		const { container } = render(CircleProgress, { percentage: 100 })
 		const svg = container.querySelector('svg')
 		const circles = container.querySelectorAll('circle')
 		expect(svg).toBeTruthy()
