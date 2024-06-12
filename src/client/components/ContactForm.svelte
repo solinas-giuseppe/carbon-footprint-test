@@ -7,18 +7,19 @@
 	import { classList } from '@/client/directives/classList.js'
 	import FormGroup from './smaller/FormGroup.svelte'
 	import FormMessage from '@/client/components/smaller/FormMessage.svelte'
+	import { onMount } from 'svelte/internal' // needs to be imported from svelte/internal for tests to work
+	import { validateEmail } from '../helpers/validations'
 
-	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 	export let locale: keyof typeof ui = defaultLang
 	type ContactFormError = { name?: string; email?: string; message?: string }
-	type ContactFormState = 'idle' | 'running' | 'error' | 'success'
+	type ContactFormState = 'initializing' | 'idle' | 'running' | 'error' | 'success'
 	let formElement: HTMLFormElement
 	let state: ContactFormState
 	let name = ''
 	let email = ''
 	let message = ''
 	let errors: ContactFormError
-	$: state = 'idle'
+	$: state = 'initializing'
 	$: errors = {}
 	const t = useTranslations(locale)
 	const url = '/api/contact'
@@ -33,7 +34,6 @@
 			})
 
 			if (response.ok) {
-				const result = await response.json()
 				state = 'success'
 			} else {
 				console.error('Error:', response.statusText)
@@ -44,19 +44,11 @@
 		}
 	}
 
-	const validateEmail = () => {
-		if (!email) {
-			return t('contactform.errors.email_empty')
-		}
-		if (!emailRegex.test(email)) {
-			return t('contactform.errors.email_invalid')
-		}
-	}
 	const validate = () => {
 		if (state === 'idle') return {}
 		const formErrors: ContactFormError = {}
 		formErrors.name = !name ? t('contactform.errors.name_empty') : ''
-		formErrors.email = validateEmail()
+		formErrors.email = validateEmail(email, t)
 		formErrors.message = !message ? t('contactform.errors.message_empty') : ''
 		return formErrors
 	}
@@ -73,12 +65,18 @@
 		}
 		state = 'error'
 	}
+
+	onMount(() => {
+		state = 'idle'
+	})
 </script>
 
-{#if state === 'success'}
+{#if state === 'initializing'}
+	<!-- Contact form initializing -->
+{:else if state === 'success'}
 	<FormMessage type="success">Message sent</FormMessage>
 {:else}
-	<form bind:this={formElement} method="POST" class="flex w-[20rem] flex-col gap-3" novalidate>
+	<form bind:this={formElement} class="flex w-[20rem] flex-col gap-3" novalidate>
 		<div>
 			<FormGroup error={errors?.name} success={''}>
 				<label for="name" use:classList={['text-primary-900', textSm, 'font-semibold']}>
@@ -115,7 +113,6 @@
 				</label>
 				<textarea
 					on:change={updateValidation}
-					required
 					disabled={state === 'running'}
 					rows="5"
 					name="message"

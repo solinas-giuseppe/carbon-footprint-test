@@ -20,5 +20,7 @@ export const inputBase = [
 	'[&:user-valid]:focus-visible:border-base-500',
 	'[&:user-invalid]:border-error-600',
 	'[&:user-invalid]:focus-visible:border-base-500',
+	'invalid:border-error-600',
+	'invalid:focus-visible:border-base-500',
 	'disabled:border-base-500'
 ]

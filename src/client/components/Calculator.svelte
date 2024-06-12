@@ -8,7 +8,7 @@
 	import ErrorPage from '@/client/components/ErrorPage.svelte'
 	import CarbonResult from '@/client/components/CarbonResult.svelte'
 	import { parseCarbonResult } from '@/client/helpers/utils'
-	import { onMount } from 'svelte/internal'
+	import { onMount } from 'svelte/internal' // needs to be imported from svelte/internal for tests to work
 	import type { CarbonObject } from '../helpers/props'
 	import { resultCardClass } from '../helpers/result-card'
 	import { storagePrefix } from '../helpers/constants'

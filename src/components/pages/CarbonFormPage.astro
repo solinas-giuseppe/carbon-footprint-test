@@ -1,10 +1,12 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import Layout from '@/layouts/Layout.astro'
-import WebsiteForm from '@/components/forms/WebsiteForm.astro'
+import WebsiteForm from '@/client/components/WebsiteForm.svelte'
 import { displayLg, textLg } from '@/utils/typo.js'
 import PreviousCalculations from '@/client/components/PreviousCalculations.svelte'
 import { ui, defaultLang } from '@/i18n/ui.js'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
 export interface Props {
 	locale: keyof typeof ui
 	page: CollectionEntry<'pages'>
@@ -19,7 +21,7 @@ const { title, seoTitle, description } = page?.data || {}
 			<div class="flex flex-col gap-1">
 				<h1 set:html={title} class:list={[displayLg, 'font-bolder']} />
 				<p set:html={page.body} class:list={[textLg, 'font-medium']} />
-				<WebsiteForm {locale} />
+				<WebsiteForm action={getRelativeLocaleUrl(locale, 'result')} {locale} client:load />
 				<br />
 			</div>
 		</div>

@@ -1,10 +1,6 @@
-import { render, waitFor, cleanup } from '@testing-library/svelte'
-import { describe, beforeEach, afterEach, it, expect } from 'vitest'
+import { render, cleanup } from '@testing-library/svelte'
+import { describe, afterEach, it, expect } from 'vitest'
 import CircleProgress from '../src/client/components/smaller/CircleProgress.svelte'
-import { useTranslations } from '../src/i18n/utils'
-import { ui, defaultLang } from '../src/i18n/ui'
-
-const t = useTranslations(defaultLang)
 
 describe('CircleProgress', () => {
 	afterEach(() => {

@@ -1,6 +1,6 @@
 import type { CarbonApiResponse, CarbonObject } from './props'
 
-const roundToNonZero = (number) => {
+const roundToNonZero = (number: number) => {
 	let decimals = 0
 	while (Math.abs(Number(number.toFixed(decimals))) === 0) {
 		decimals++

@@ -6,8 +6,8 @@ import { ui, defaultLang } from '@/i18n/ui.js'
 import { useTranslations } from '@/i18n/utils'
 import { getFooterMenu } from '@/utils/menus.js'
 import { buttonBase, buttonTertiary, buttonLg } from '@/utils/buttons.js'
-import NewsletterForm from '@/components/forms/NewsletterForm.astro'
 import SocialIcons from '@/components/common/SocialIcons.astro'
+import NewsletterForm from '@/client/components/NewsletterForm.svelte'
 
 export interface Props {
 	id: string
@@ -29,7 +29,7 @@ const t = useTranslations(locale)
 					<span class:list={[displayXs, 'font-bolder']} set:html={t('newsletter.title')} />
 					<p class={textMd} set:html={t('newsletter.content')} />
 				</div>
-				<NewsletterForm {locale} />
+				<NewsletterForm {locale} client:idle />
 				<SocialIcons
 					{locale}
 					listClass="flex justify-end gap-1.5"

@@ -3,7 +3,6 @@ import aws from 'astro-sst'
 import tailwind from '@astrojs/tailwind'
 import svelte from '@astrojs/svelte'
 import mdx from '@astrojs/mdx'
-// import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,13 +14,8 @@ export default defineConfig({
 		locales: ['en', 'it'],
 		routing: {
 			prefixDefaultLocale: true,
-			redirectToDefaultLocale: true
+			redirectToDefaultLocale: false
 		}
 	},
 	adapter: aws()
-	// adapter: node({
-	//    mode: "standalone"
-	//  })
 })
-
-import { defineConfig } from 'astro/config'

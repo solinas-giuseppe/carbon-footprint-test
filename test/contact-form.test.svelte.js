@@ -55,14 +55,20 @@ describe('ContactForm Component', () => {
 	it('displays error messages when fields are empty', async () => {
 		const { findByText, container } = render(ContactForm, { locale: 'en' })
 
+		const nameInput = container.querySelector('[name="name"]')
+		const emailInput = container.querySelector('[name="email"]')
+		const messageInput = container.querySelector('[name="message"]')
 		const submitButton = container.querySelector('button[type="button"]')
 
 		await fireEvent.click(submitButton)
 
 		await waitFor(() => {
 			expect(findByText(t('contactform.errors.name_empty'))).toBeTruthy()
+			expect(nameInput.validity.valid).toBe(false)
 			expect(findByText(t('contactform.errors.email_empty'))).toBeTruthy()
+			expect(emailInput.validity.valid).toBe(false)
 			expect(findByText(t('contactform.errors.message_empty'))).toBeTruthy()
+			expect(messageInput.validity.valid).toBe(false)
 		})
 	})
 
@@ -77,6 +83,7 @@ describe('ContactForm Component', () => {
 
 		await waitFor(() => {
 			expect(findByText(t('contactform.errors.email_invalid'))).toBeTruthy()
+			expect(emailInput.validity.valid).toBe(false)
 		})
 	})
 })

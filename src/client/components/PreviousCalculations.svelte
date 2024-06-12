@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte/internal'
+	import { onMount } from 'svelte/internal' // needs to be imported from svelte/internal for tests to work
 	import type { CarbonObject } from '../helpers/props'
 	import { storagePrefix } from '../helpers/constants'
 	import CarbonResult from './CarbonResult.svelte'
