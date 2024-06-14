@@ -22,7 +22,7 @@
 	const onSubmit = async () => {
 		const url = new URL(action, window.location.origin)
 		url.searchParams.set('site', site)
-		window.location.assign(url.toString())
+		window.location.href = url.toString()
 	}
 
 	const validate = () => {

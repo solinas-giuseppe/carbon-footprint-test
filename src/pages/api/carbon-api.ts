@@ -1,6 +1,5 @@
 export const prerender = false
 export async function GET({ request }) {
-	console.log('----- > REAL API CALL')
 	const requestUrl = new URL(request.url)
 	const site = requestUrl.searchParams.get('site')
 	const fetchUrl = new URL('/site', import.meta.env.CARBON_API_ENDPOINT)

@@ -39,7 +39,6 @@ declare global {
 	}
 }
 Cypress.Commands.add('stubCalculation', function () {
-	console.log('INTERCEPT')
 	cy.intercept(
 		{
 			method: 'GET',
@@ -48,7 +47,6 @@ Cypress.Commands.add('stubCalculation', function () {
 		function (request) {
 			const requestUrl = new URL(request.url)
 			const site = requestUrl.searchParams.get('site')
-			console.log('--- > SITE', site, site === 'invalid-site')
 			if (/invalid-site/.test(site)) {
 				return request.reply({
 					statusCode: 422,

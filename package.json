@@ -13,10 +13,10 @@
 		"test:svelte:watch": "vitest --config vitest.config.svelte.ts --disable-console-intercept ",
 		"test:astro:run": "vitest run --config vitest.config.astro.ts",
 		"test:svelte:run": "vitest run --config vitest.config.svelte.ts",
-		"sst:deploy": "pnpm test:astro:run && pnpm test:svelte:run && test:e2e && sst deploy",
+		"sst:deploy": "pnpm test:astro:run && pnpm test:svelte:run && pnpm test:e2e && sst deploy",
 		"sst:dev": "sst dev",
-		"cy:run": "cypress run",
-		"test:e2e": "start-server-and-test 4321 cy:run"
+		"cy:run": "cypress run --e2e",
+		"test:e2e": "start-server-and-test \"pnpm dev --port 3000\" http-get://localhost:3000/en/ \"cypress run --e2e\""
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.7.0",

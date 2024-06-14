@@ -17,6 +17,10 @@ describe('ContactForm Component', () => {
 			ok: true,
 			json: vi.fn().mockResolvedValue({ success: true })
 		})
+		Object.defineProperty(window, 'location', {
+			writable: true,
+			value: { assign: vi.fn() }
+		})
 	})
 
 	afterEach(() => {
