@@ -1,5 +1,5 @@
 import { render, fireEvent, waitFor, cleanup } from '@testing-library/svelte'
-import { describe, afterEach, it, expect, vi } from 'vitest'
+import { describe, afterEach, it, expect } from 'vitest'
 
 import WebsiteForm from '@/client/components/WebsiteForm.svelte'
 import { defaultLang as locale } from '@/i18n/ui'

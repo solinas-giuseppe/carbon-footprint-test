@@ -1,0 +1,16 @@
+{
+	"url": "https://www.google.com/",
+	"green": true,
+	"bytes": 1014279,
+	"cleanerThan": 0.77,
+	"rating": "B",
+	"statistics": {
+		"adjustedBytes": 765780.645,
+		"energy": 0.0005776829295326025,
+		"co2": {
+			"grid": { "grams": 0.2553358548534103, "litres": 0.1420178024694668 },
+			"renewable": { "grams": 0.2213680985968933, "litres": 0.12312493643959203 }
+		}
+	},
+	"timestamp": 1717595201
+}

@@ -22,7 +22,7 @@
 	const onSubmit = async () => {
 		const url = new URL(action, window.location.origin)
 		url.searchParams.set('site', site)
-		window.location.href = url.toString()
+		window.location.assign(url.toString())
 	}
 
 	const validate = () => {
@@ -53,7 +53,7 @@
 {#if state === 'initializing'}
 	<!-- Website form initializing -->
 {:else}
-	<form novalidate>
+	<form {action} id="websiteform" novalidate>
 		<div use:classList={['w-[28rem]']}>
 			<label for="site" use:classList={['text-primary-900', textSm, 'font-semibold']}>
 				{@html t('websiteform.website.label')}

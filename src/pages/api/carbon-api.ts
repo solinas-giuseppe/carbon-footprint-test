@@ -1,5 +1,6 @@
 export const prerender = false
 export async function GET({ request }) {
+	console.log('----- > REAL API CALL')
 	const requestUrl = new URL(request.url)
 	const site = requestUrl.searchParams.get('site')
 	const fetchUrl = new URL('/site', import.meta.env.CARBON_API_ENDPOINT)
@@ -10,6 +11,6 @@ export async function GET({ request }) {
 		return new Response(text)
 	} catch (err) {
 		console.log('ERROR', err)
-		return new Response(JSON.stringify({ error: 'server error' }))
+		return new Response(JSON.stringify({ error: 'server error' }), { status: 500 })
 	}
 }
