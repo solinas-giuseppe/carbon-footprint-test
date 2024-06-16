@@ -57,7 +57,7 @@
 				>{@html t('newsletterform.email.label')}</label
 			>
 			<div class="grid grid-cols-[20rem_auto] grid-rows-[1fr_1fr] gap-2">
-				<FormGroup error={errors?.email} success={''} className="row-span-2">
+				<FormGroup error={errors?.email} success={''} class="row-span-2">
 					<input
 						on:change={updateValidation}
 						name="email"

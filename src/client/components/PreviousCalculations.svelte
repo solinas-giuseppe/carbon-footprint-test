@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte/internal' // needs to be imported from svelte/internal for tests to work
-	import type { CarbonObject } from '../helpers/props'
-	import { storagePrefix } from '../helpers/constants'
-	import CarbonResult from './CarbonResult.svelte'
+	import type { CarbonObject } from '@/client/helpers/props'
+	import { storagePrefix } from '@/client/helpers/constants'
+	import CarbonResult from '@/client/components/CarbonResult.svelte'
 	import { ui, defaultLang } from '@/i18n/ui.js'
 	import { useTranslations } from '@/i18n/utils.js'
 	import { resultCardClass } from '@/client/helpers/result-card'
 
-	import Accordion from './smaller/Accordion.svelte'
-	import AccordionItem from './smaller/AccordionItem.svelte'
-	import { classList } from '../directives/classList'
+	import Accordion from '@/client/components/smaller/Accordion.svelte'
+	import AccordionItem from '@/client/components/smaller/AccordionItem.svelte'
+	import { classList } from '@/client/directives/classList'
 	import { displaySm, textLg } from '@/utils/typo'
 	import { buttonBase, buttonTertiary, buttonXl } from '@/utils/buttons'
 	import { idAttribute } from '@/utils/string'

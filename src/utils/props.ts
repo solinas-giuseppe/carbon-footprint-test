@@ -1,6 +1,2 @@
-export type ClassList =
-	| Record<string, boolean>
-	| Record<any, any>
-	| Iterable<string>
-	| Iterable<any>
-	| string
+export type NestedList<T> = T | NestedList<T>[]
+export type ClassList = NestedList<string>

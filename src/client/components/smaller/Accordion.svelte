@@ -1,11 +1,12 @@
 <script>
 	import { classList } from '@/client/directives/classList'
+	import { animationBase } from '@/client/helpers/constants'
 	import { onDestroy } from 'svelte'
 	import { setContext } from 'svelte'
 	import { createEventDispatcher } from 'svelte'
 	import { writable } from 'svelte/store'
 
-	export let duration = 0.2
+	export let duration = animationBase / 1000 / 2
 	export let easing = 'ease'
 	export let key = null
 	export let initialKey = null

@@ -11,7 +11,7 @@ describe('User performs a calculation with an invalid website', () => {
 	beforeEach(() => {
 		cy.viewport(1440, 1024)
 		cy.stubCalculation()
-		cy.visit('http://localhost:4321/en/')
+		cy.visit('http://localhost:3001/en/')
 	})
 
 	it('sees the expected content on the home page', () => {
@@ -49,7 +49,7 @@ describe('User performs a calculation with a valid website', () => {
 		cy.viewport(1440, 1024)
 
 		cy.stubCalculation()
-		cy.visit('http://localhost:4321/en/')
+		cy.visit('http://localhost:3001/en/')
 	})
 
 	it('sucessfully calculates the impact for a valid website', () => {

@@ -2,11 +2,9 @@
 	import { formGroup } from '@/utils/inputs.js'
 	import FormMessage from '@/client/components/smaller/FormMessage.svelte'
 	import { classList } from '@/client/directives/classList'
-	import type { ClassList } from '@/utils/props'
 
 	export let error: string = ''
 	export let success: string = ''
-	export let className: ClassList = ''
 	let group: HTMLElement
 
 	$: {
@@ -19,7 +17,7 @@
 	}
 </script>
 
-<div use:classList={[formGroup, className]} bind:this={group}>
+<div use:classList={[formGroup, $$props.class]} bind:this={group}>
 	<slot />
 	{#if error}
 		<FormMessage type="error">{@html error}</FormMessage>

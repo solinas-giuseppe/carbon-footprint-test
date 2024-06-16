@@ -74,7 +74,7 @@
 			content={t('result.green-server.content')}
 			theme={green ? 'success' : 'warning'}
 			index={cardIndex + 1}
-			cardClass="min-h-[252px]"
+			class="min-h-[252px]"
 			{state}
 			{animated}
 		>
@@ -89,7 +89,7 @@
 			content={t('result.bytes.content')}
 			theme={bytes < thresholds.bytes ? 'success' : 'warning'}
 			index={cardIndex + 2}
-			cardClass="min-h-[252px]"
+			class="min-h-[252px]"
 			{state}
 			{animated}
 		>
@@ -107,7 +107,7 @@
 			content={t('result.co2.content')}
 			theme={grams < thresholds.grams ? 'success' : 'warning'}
 			index={cardIndex + 3}
-			cardClass="min-h-[252px]"
+			class="min-h-[252px]"
 			{state}
 			{animated}
 		>
@@ -125,7 +125,7 @@
 			content={t('result.kw.content')}
 			theme={energy < thresholds.energy ? 'success' : 'warning'}
 			index={cardIndex + 4}
-			cardClass="min-h-[252px]"
+			class="min-h-[252px]"
 			{state}
 			{animated}
 		>

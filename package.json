@@ -13,10 +13,11 @@
 		"test:svelte:watch": "vitest --config vitest.config.svelte.ts --disable-console-intercept ",
 		"test:astro:run": "vitest run --config vitest.config.astro.ts",
 		"test:svelte:run": "vitest run --config vitest.config.svelte.ts",
-		"sst:deploy": "pnpm test:astro:run && pnpm test:svelte:run && pnpm test:e2e && sst deploy",
+		"test:e2e": "start-server-and-test \"pnpm dev --port 3001\" http-get://localhost:3001/en/ \"cypress run --e2e\"",
+		"test:all": "pnpm test:astro:run && pnpm test:svelte:run && pnpm test:e2e",
+		"sst:deploy": "pnpm test:all && sst deploy",
 		"sst:dev": "sst dev",
-		"cy:run": "cypress run --e2e",
-		"test:e2e": "start-server-and-test \"pnpm dev --port 3000\" http-get://localhost:3000/en/ \"cypress run --e2e\""
+		"cy:run": "cypress run --e2e"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.7.0",
@@ -41,10 +42,6 @@
 		"cypress": "^13.11.0",
 		"jsdom": "^24.1.0",
 		"msw": "^2.3.1",
-		"prettier": "^3.3.1",
-		"prettier-plugin-astro": "^0.14.0",
-		"prettier-plugin-svelte": "^3.2.3",
-		"prettier-plugin-tailwindcss": "^0.6.1",
 		"sst": "^2.43.0",
 		"start-server-and-test": "^2.0.4",
 		"vite-tsconfig-paths": "^4.3.2",

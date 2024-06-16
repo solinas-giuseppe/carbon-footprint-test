@@ -6,9 +6,9 @@
 	let icon = (() => {
 		switch (type) {
 			case 'error':
-				return 'form-error'
+				return 'form-error' as const
 			case 'success':
-				return 'form-success'
+				return 'form-success' as const
 		}
 	})()
 	let color = (() => {

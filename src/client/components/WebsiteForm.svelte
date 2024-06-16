@@ -53,13 +53,13 @@
 {#if state === 'initializing'}
 	<!-- Website form initializing -->
 {:else}
-	<form {action} id="websiteform" novalidate>
+	<form {action} novalidate>
 		<div use:classList={['w-[28rem]']}>
 			<label for="site" use:classList={['text-primary-900', textSm, 'font-semibold']}>
 				{@html t('websiteform.website.label')}
 			</label>
 			<div class="grid grid-cols-[20rem_auto] grid-rows-[1fr_1fr] gap-2">
-				<FormGroup error={errors?.site} success={''} className="row-span-2">
+				<FormGroup error={errors?.site} success={''} class="row-span-2">
 					<input
 						on:change={updateValidation}
 						name="site"

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { classList } from '@/client/directives/classList'
 	import { animationBase } from '@/client/helpers/constants'
-	import type { ClassList } from '@/utils/props'
 	import { displayXs, textSm } from '@/utils/typo'
 	export let title: string
 	export let content: string
@@ -9,12 +8,11 @@
 	export let theme: 'success' | 'warning'
 	export let index: number
 	export let animated: boolean = false
-	export let cardClass: ClassList = ''
 	const loadingClass = ['bg-secondary-100']
 	const successClass = ['bg-primary-100', 'text-primary-900']
 	const warningClass = ['bg-warning-200', 'text-warning-400']
 	const blockClass = [
-		...[].concat(cardClass),
+		...[].concat($$props.class),
 		'py-4 px-3',
 		'rounded-8',
 		state === 'loading' && ['animate-pulse']
